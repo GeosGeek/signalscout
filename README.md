@@ -2,8 +2,9 @@
 
 Ham and GMRS repeaters in one map! This project demonstrates how to create a simple web map using Leaflet.js and load local JSON data to display markers for various locations.
 
-## Overview
+![alt text](https://github.com/GeosGeek/signalscout/blob/main/signalscout-page.png?raw=true)
 
+## Overview
 
 Outdoor enthusiasts use handheld radios to communicate with friends, family, or even emergency services. Their tools of choice are often FRS, GMRS, or Ham radios. Although the latter two options require an FCC license to transmit, they enable operators to use repeaters, significantly increasing the transmission range of a low-power handheld radio.
 
