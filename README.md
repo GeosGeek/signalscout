@@ -2,7 +2,7 @@
 
 Ham and GMRS repeaters in one map! This project demonstrates how to create a simple web map using Leaflet.js and load local JSON data to display markers for various locations.
 
-![alt text](https://github.com/GeosGeek/signalscout/blob/main/signalscout-page.png?raw=true)
+![Snip of SignalScout UI](/signalscout-page.png)
 
 ## Overview
 
