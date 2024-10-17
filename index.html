@@ -29,14 +29,15 @@
             .then(data => {
                 data.forEach(repeater => {
                     // const { lat, lon, callsign, frequency, notes } = repeater;
-                    const { state, city, frequency, callsign, offset, notes, lat, lon} = repeater;
+                    const { State, City, Frequency, Callsign, Offset, Notes, lat, lon } = repeater;
 
                     // Create a marker for each repeater
                     const marker = L.marker([lat, lon]).addTo(map);
                     marker.bindPopup(`
-                        <strong>${callsign || "Callsign Unknown"}</strong><br>
-                        Frequency: ${frequency || "N/A"}<br>
-                        Notes: ${notes || "N/A"}
+                        <strong>${Callsign || "Callsign Unknown"}</strong><br>
+                        ${City+", "+State}<br>
+                        Frequency: ${Frequency+Offset || "N/A"}<br>
+                        Notes: ${Notes || "N/A"}
                     `); // Add a popup with repeater info
                 });
             })
