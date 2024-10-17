@@ -35,6 +35,8 @@ Before running the application, ensure you have the following installed:
 - Python (for running a local server)
   - Or Node.js (if you prefer to use `http-server`)
 
-## File Structure
+## Environment Setup
+- source ~./bashrc
+- http-server
 
 KQ4PTJ, 73!
