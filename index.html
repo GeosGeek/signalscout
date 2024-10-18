@@ -32,7 +32,14 @@
                     const { State, City, Frequency, Callsign, Offset, Notes, lat, lon } = repeater;
 
                     // Create a marker for each repeater
-                    const marker = L.marker([lat, lon]).addTo(map);
+                    const marker = L.circleMarker([lat, lon], {
+                      radius: 8, // Radius of the circle
+                      fillColor: "#0000FF", // Fill color
+                      color: "#000000", // Border color
+                      weight: 1, // Border weight
+                      opacity: 1, // Opacity of the border
+                      fillOpacity: 0.8
+                    }).addTo(map);
                     marker.bindPopup(`
                         <strong>${Callsign || "Callsign Unknown"}</strong><br>
                         ${City+", "+State}<br>
@@ -51,7 +58,8 @@
             .then(data => {
                 data.forEach(repeater => {
                     // const { lat, lon, callsign, frequency, notes } = repeater;
-                    const { ID, Name, Location, State, Modified, Frequency, Type, Owner, DRI, Travel, Status, Latitude, Longitude, Network, Radius, HAAT, Node } = repeater;
+                    const { ID, Name, Location, State, Modified, Frequency, Type, Owner, DRI, 
+                            Travel, Status, Latitude, Longitude, Network, Radius, HAAT, Node } = repeater;
 
                     // Create a marker for each repeater
                     const marker = L.circleMarker([Latitude, Longitude], {
@@ -60,7 +68,8 @@
                       color: "#000000", // Border color
                       weight: 1, // Border weight
                       opacity: 1, // Opacity of the border
-                      fillOpacity: 0.8}).addTo(map);
+                      fillOpacity: 0.8
+                    }).addTo(map);
                     marker.bindPopup(`
                         <strong>${Name || "Name Unknown"}</strong><br>
                         ${State+", "+Location}<br>
