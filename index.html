@@ -23,7 +23,7 @@
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
 
-        // Load local JSON file
+        // Load Ham data from local JSON file
         fetch('repeaters.json')
             .then(response => response.json())
             .then(data => {
@@ -38,6 +38,34 @@
                         ${City+", "+State}<br>
                         Frequency: ${Frequency+Offset || "N/A"}<br>
                         Notes: ${Notes || "N/A"}
+                    `); // Add a popup with repeater info
+                });
+            })
+            .catch(error => {
+                console.error('Error loading JSON:', error);
+            });
+            
+        // GMRS Data - https://api.mygmrs.com/repeaters?limit=99&outdated=false&offline=false'
+        fetch('repeaters_gmrs.json')
+            .then(response => response.json())
+            .then(data => {
+                data.forEach(repeater => {
+                    // const { lat, lon, callsign, frequency, notes } = repeater;
+                    const { ID, Name, Location, State, Modified, Frequency, Type, Owner, DRI, Travel, Status, Latitude, Longitude, Network, Radius, HAAT, Node } = repeater;
+
+                    // Create a marker for each repeater
+                    const marker = L.circleMarker([Latitude, Longitude], {
+                      radius: 8, // Radius of the circle
+                      fillColor: "#FF0000", // Fill color
+                      color: "#000000", // Border color
+                      weight: 1, // Border weight
+                      opacity: 1, // Opacity of the border
+                      fillOpacity: 0.8}).addTo(map);
+                    marker.bindPopup(`
+                        <strong>${Name || "Name Unknown"}</strong><br>
+                        ${State+", "+Location}<br>
+                        Frequency: ${Frequency || "N/A"}<br>
+                        Status: ${Status || "N/A"}
                     `); // Add a popup with repeater info
                 });
             })
