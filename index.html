@@ -24,7 +24,7 @@
         }).addTo(map);
 
         // Load Ham data from local JSON file
-        fetch('repeaters.json')
+        fetch('repeaters_ham.json')
             .then(response => response.json())
             .then(data => {
                 data.forEach(repeater => {
