@@ -15,7 +15,7 @@
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script>
         // Initialize the Leaflet map
-        const map = L.map('map').setView([38.95, -77.45], 10); // Centering on Virginia
+        const map = L.map('map').setView([38.95, -77.45], 10); // Centering on Dulles Airport
 
         // Add OpenStreetMap tile layer
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -33,12 +33,8 @@
 
                     // Create a marker for each repeater
                     const marker = L.circleMarker([lat, lon], {
-                      radius: 8, // Radius of the circle
-                      fillColor: "#0000FF", // Fill color
-                      color: "#000000", // Border color
-                      weight: 1, // Border weight
-                      opacity: 1, // Opacity of the border
-                      fillOpacity: 0.8
+                      radius: 8, fillColor: "#0000FF", color: "#000000",
+                      weight: 1, opacity: 1, fillOpacity: 0.8
                     }).addTo(map);
                     marker.bindPopup(`
                         <strong>${Callsign || "Callsign Unknown"}</strong><br>
@@ -63,12 +59,8 @@
 
                     // Create a marker for each repeater
                     const marker = L.circleMarker([Latitude, Longitude], {
-                      radius: 8, // Radius of the circle
-                      fillColor: "#FF0000", // Fill color
-                      color: "#000000", // Border color
-                      weight: 1, // Border weight
-                      opacity: 1, // Opacity of the border
-                      fillOpacity: 0.8
+                      radius: 8, fillColor: "#FF0000", color: "#000000",
+                      weight: 1, opacity: 1, fillOpacity: 0.8
                     }).addTo(map);
                     marker.bindPopup(`
                         <strong>${Name || "Name Unknown"}</strong><br>
