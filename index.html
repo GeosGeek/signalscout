@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Singal Scout</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="Leaflet.markercluster-1.4.1/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="Leaflet.markercluster-1.4.1/dist/MarkerCluster.Default.css" />
+    <!-- <script src="Leaflet.markercluster-1.4.1/dist/leaflet.markercluster.js"></script> -->
+    <script src="Leaflet.markercluster-1.4.1/dist/leaflet.markercluster-src.js"></script>
+    <script src="Leaflet.markercluster-1.4.1/src/MarkerCluster.js"></script>
     <style>
         body { margin: 0; }
         #map { width: 100%; height: 100vh; }
@@ -49,7 +54,7 @@
             });
             
         // GMRS Data - https://api.mygmrs.com/repeaters?limit=99&outdated=false&offline=false'
-        fetch('repeaters_gmrs.json')
+        fetch('repeaters_gmrs_bulk.json')
             .then(response => response.json())
             .then(data => {
                 data.forEach(repeater => {
@@ -57,17 +62,28 @@
                     const { ID, Name, Location, State, Modified, Frequency, Type, Owner, DRI, 
                             Travel, Status, Latitude, Longitude, Network, Radius, HAAT, Node } = repeater;
 
-                    // Create a marker for each repeater
-                    const marker = L.circleMarker([Latitude, Longitude], {
-                      radius: 8, fillColor: "#FF0000", color: "#000000",
-                      weight: 1, opacity: 1, fillOpacity: 0.8
-                    }).addTo(map);
-                    marker.bindPopup(`
-                        <strong>${Name || "Name Unknown"}</strong><br>
-                        ${State+", "+Location}<br>
-                        Frequency: ${Frequency || "N/A"}<br>
-                        Status: ${Status || "N/A"}
-                    `); // Add a popup with repeater info
+                    // Cerate a Leaflet.markerClusterGroup
+                    const markers = L.markerClusterGroup();
+
+                    combinedData.forEach(item => {
+                        const marker = L.marker([item.Latitude, item.Longitude])
+                            .bindPopup(`<strong>${item.Name || "Name Unknown"}</strong><br>`);
+                        markers.addLayer(marker);
+                    });
+
+                    map.addLayer(markers);
+                    
+                    // // Create a marker for each repeater
+                    // const marker = L.circleMarker([Latitude, Longitude], {
+                    //   radius: 8, fillColor: "#FF0000", color: "#000000",
+                    //   weight: 1, opacity: 1, fillOpacity: 0.8
+                    // }).addTo(map);
+                    // marker.bindPopup(`
+                    //     <strong>${Name || "Name Unknown"}</strong><br>
+                    //     ${State+", "+Location}<br>
+                    //     Frequency: ${Frequency || "N/A"}<br>
+                    //     Status: ${Status || "N/A"}
+                    // `); // Add a popup with repeater info
                 });
             })
             .catch(error => {
