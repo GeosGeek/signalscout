@@ -3,13 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Singal Scout</title>
+    <title>Signal Scout</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-    <link rel="stylesheet" href="Leaflet.markercluster-1.4.1/dist/MarkerCluster.css" />
-    <link rel="stylesheet" href="Leaflet.markercluster-1.4.1/dist/MarkerCluster.Default.css" />
-    <!-- <script src="Leaflet.markercluster-1.4.1/dist/leaflet.markercluster.js"></script> -->
-    <script src="Leaflet.markercluster-1.4.1/dist/leaflet.markercluster-src.js"></script>
-    <script src="Leaflet.markercluster-1.4.1/src/MarkerCluster.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.Default.css" />
     <style>
         body { margin: 0; }
         #map { width: 100%; height: 100vh; }
@@ -17,7 +14,10 @@
 </head>
 <body>
     <div id="map"></div>
+    
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
+    
     <script>
         // Initialize the Leaflet map
         const map = L.map('map').setView([38.95, -77.45], 10); // Centering on Dulles Airport
@@ -28,63 +28,57 @@
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
 
+        // Create a Leaflet.markerClusterGroup
+        const markers = L.markerClusterGroup();
+
         // Load Ham data from local JSON file
         fetch('repeaters_ham.json')
             .then(response => response.json())
             .then(data => {
                 data.forEach(repeater => {
-                    // const { lat, lon, callsign, frequency, notes } = repeater;
                     const { State, City, Frequency, Callsign, Offset, Notes, lat, lon } = repeater;
 
                     // Create a marker for each repeater
                     const marker = L.circleMarker([lat, lon], {
-                      radius: 8, fillColor: "#0000FF", color: "#000000",
-                      weight: 1, opacity: 1, fillOpacity: 0.8
-                    }).addTo(map);
-                    marker.bindPopup(`
+                        radius: 8, fillColor: "#0000FF", color: "#000000",
+                        weight: 1, opacity: 1, fillOpacity: 0.8
+                    }).bindPopup(`
                         <strong>${Callsign || "Callsign Unknown"}</strong><br>
-                        ${City+", "+State}<br>
-                        Frequency: ${Frequency+Offset || "N/A"}<br>
-                        Notes: ${Notes || "N/A"}
-                    `); // Add a popup with repeater info
+                        ${City + ", " + State}<br>
+                        Frequency: ${Frequency + Offset || "N/A"}<br>
+                        CTCSS: ${Notes || "N/A"}<br>
+                        License: Ham
+                    `); // Add a popup with Ham repeater info
+                    
+                    markers.addLayer(marker); // Add marker to the cluster
                 });
+                map.addLayer(markers); // Add cluster layer to map
             })
             .catch(error => {
                 console.error('Error loading JSON:', error);
             });
-            
-        // GMRS Data - https://api.mygmrs.com/repeaters?limit=99&outdated=false&offline=false'
+        
+        // Load GMRS Data
         fetch('repeaters_gmrs_bulk.json')
             .then(response => response.json())
             .then(data => {
                 data.forEach(repeater => {
-                    // const { lat, lon, callsign, frequency, notes } = repeater;
-                    const { ID, Name, Location, State, Modified, Frequency, Type, Owner, DRI, 
-                            Travel, Status, Latitude, Longitude, Network, Radius, HAAT, Node } = repeater;
+                    const { Name, State, Latitude, Longitude, Frequency, Type, Status } = repeater;
 
-                    // Cerate a Leaflet.markerClusterGroup
-                    const markers = L.markerClusterGroup();
-
-                    combinedData.forEach(item => {
-                        const marker = L.marker([item.Latitude, item.Longitude])
-                            .bindPopup(`<strong>${item.Name || "Name Unknown"}</strong><br>`);
-                        markers.addLayer(marker);
-                    });
-
-                    map.addLayer(markers);
+                    const marker = L.circleMarker([Latitude, Longitude], {
+                        radius: 8, fillColor: "#FF0000", color: "#000000",
+                        weight: 1, opacity: 1, fillOpacity: 0.8
+                    }).bindPopup(
+                        `<strong>${Name || "Name Unknown"}</strong><br>
+                        Frequency: ${Frequency}<br>
+                        Type: ${Type}<br>
+                        Status: ${Status}<br>
+                        License: GMRS
+                    `); // Add a popup with GMRS repeater info
                     
-                    // // Create a marker for each repeater
-                    // const marker = L.circleMarker([Latitude, Longitude], {
-                    //   radius: 8, fillColor: "#FF0000", color: "#000000",
-                    //   weight: 1, opacity: 1, fillOpacity: 0.8
-                    // }).addTo(map);
-                    // marker.bindPopup(`
-                    //     <strong>${Name || "Name Unknown"}</strong><br>
-                    //     ${State+", "+Location}<br>
-                    //     Frequency: ${Frequency || "N/A"}<br>
-                    //     Status: ${Status || "N/A"}
-                    // `); // Add a popup with repeater info
+                    markers.addLayer(marker); // Add marker to the cluster
                 });
+                map.addLayer(markers); // Add cluster layer to map
             })
             .catch(error => {
                 console.error('Error loading JSON:', error);
