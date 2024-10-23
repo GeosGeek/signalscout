@@ -46,7 +46,8 @@
                         <strong>${Callsign || "Callsign Unknown"}</strong><br>
                         ${City + ", " + State}<br>
                         Frequency: ${Frequency + Offset || "N/A"}<br>
-                        Notes: ${Notes || "N/A"}
+                        CTCSS: ${Notes || "N/A"}<br>
+                        License: Ham
                     `); // Add a popup with Ham repeater info
                     
                     markers.addLayer(marker); // Add marker to the cluster
@@ -64,12 +65,16 @@
                 data.forEach(repeater => {
                     const { Name, State, Latitude, Longitude, Frequency, Type, Status } = repeater;
 
-                    const marker = L.marker([Latitude, Longitude])
-                        .bindPopup(`<strong>GMRS ${Name || "Name Unknown"}</strong><br>
-                                    Frequency: ${Frequency}<br>
-                                    Type: ${Type}<br>
-                                    Status: ${Status}<br>
-                        `); // Add a popup with GMRS repeater info
+                    const marker = L.circleMarker([Latitude, Longitude], {
+                        radius: 8, fillColor: "#FF0000", color: "#000000",
+                        weight: 1, opacity: 1, fillOpacity: 0.8
+                    }).bindPopup(
+                        `<strong>${Name || "Name Unknown"}</strong><br>
+                        Frequency: ${Frequency}<br>
+                        Type: ${Type}<br>
+                        Status: ${Status}<br>
+                        License: GMRS
+                    `); // Add a popup with GMRS repeater info
                     
                     markers.addLayer(marker); // Add marker to the cluster
                 });
