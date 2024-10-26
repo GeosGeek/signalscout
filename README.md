@@ -12,6 +12,9 @@ Signal Scout displays both Ham and GMRS repeater locations, so operators can cho
 
 Signal Scout fetches open source Ham and GMRS repeater data and displays it on a Leaflet map. Each marker represents a repeater, with details shown in a popup when clicked.
 
+## Repeater Frequencies / Bands
+Signal Scout currently only includes VHF, UHF, and GMRS repeater information. Repeaters operating on any other band are not included.
+
 ## Future Imrpovements
 - ~~Display all attributes for each repeater~~
 - ~~Display multiple reapeaters in same location with Leaflet.markerCluster~~
@@ -27,6 +30,12 @@ Signal Scout fetches open source Ham and GMRS repeater data and displays it on a
 - Dynamic loading of local JSON data
 - Markers for each repeater location
 - Popup information for each marker
+
+## Data Sources
+- Liveine Central API
+  - https://www.levinecentral.com/repeaters/repeater_fetch.php?
+- MyGMRS API
+  - https://api.mygmrs.com/repeaters?
 
 ## Prerequisites
 Before running the application, ensure you have the following installed:
