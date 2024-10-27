@@ -50,7 +50,7 @@ ham_json = fetchData(HAM_FILE)
 });
 
 // Load GMRS Data
-gmrs_json = fetch(GMRS_FILE)
+gmrs_json = fetchData(GMRS_FILE)
 .then(data => {
     data.forEach(repeater => {
         const { Name, State, Latitude, Longitude, Frequency, Type, Status } = repeater;
