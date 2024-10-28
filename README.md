@@ -16,14 +16,21 @@ Signal Scout fetches open source Ham and GMRS repeater data and displays it on a
 Signal Scout currently only includes VHF, UHF, and GMRS repeater information. Repeaters operating on any other band are not included.
 
 ## Future Imrpovements
+### Display
 - ~~Display all attributes for each repeater~~
 - ~~Display multiple reapeaters in same location with Leaflet.markerCluster~~
-- ~~Load GMRS repeater data for VA~~
-- Load Ham repeater data for multiple states
-- Dynamically load more repeater data
-  - Store multiple state's data in local db for quick display
-  - Make requests to Ham/GMRS APIs as needed when user pans/scrolls/zooms
-- Enable users to see all repeater attributes if desired
+- Enable users to explore more repeater attributes if desired
+### Data Storage
+- Load repeater data from local files 
+  ~~Load GMRS repeater data for multiple states~~
+  - Load Ham repeater data for multiple states
+- Standup lightweight database locally
+  - Ingest local JSON data
+### Data Retrieval
+- Fetch data from APIs if not found locally
+  - Fetch only data within user's current map extent
+### Widgets
+- Enable users to select from variety of basemaps
 
 ## Features
 - Interactive map with Leaflet.js
@@ -44,7 +51,7 @@ Before running the application, ensure you have the following installed:
   - Or Node.js (if you prefer to use `http-server`)
 
 ## Environment Setup
-- source ~./bashrc
-- http-server
+- `source ~.bashrc` Run this in home directory to set node environment variables
+- `http-server`
 
 KQ4PTJ, 73!
