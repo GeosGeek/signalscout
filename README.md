@@ -25,18 +25,15 @@ Signal Scout currently only includes VHF, UHF, and GMRS repeater information. Re
   ~~Load GMRS repeater data for multiple states~~
   - Load Ham repeater data for multiple states
 - Standup lightweight database locally
-  - Ingest local JSON data
+  - Choose between Postgres/PostGIS, MongoDB/GeoJSON, or SQLite/SpatiaLite
+- Develop RESTful API to handle CRUD opertaions
+  - Implement with Express.js or similar
+  - Fetch data from API in main.js
 ### Data Retrieval
 - Fetch data from APIs if not found locally
   - Fetch only data within user's current map extent
 ### Widgets
 - Enable users to select from variety of basemaps
-
-## Features
-- Interactive map with Leaflet.js
-- Dynamic loading of local JSON data
-- Markers for each repeater location
-- Popup information for each marker
 
 ## Data Sources
 - Liveine Central API
