@@ -22,7 +22,7 @@ Signal Scout currently only includes VHF, UHF, and GMRS repeater information. Re
 - Enable users to explore more repeater attributes if desired
 ### Data Storage
 - Load repeater data from local files 
-  ~~Load GMRS repeater data for multiple states~~
+  - ~~Load GMRS repeater data for multiple states~~
   - Load Ham repeater data for multiple states
 - Standup lightweight database locally
   - Choose between Postgres/PostGIS, MongoDB/GeoJSON, or SQLite/SpatiaLite
