@@ -58,5 +58,8 @@ Before running the application, ensure you have the following installed:
     - `-p 27017:27017` Maps the MongoDB port to your local machine
     - `-v mongo-data:/data/db` Creates a Docker volume to persist data
     - `docker exec -it mongodb mongo` Runs the mongodb container?
+- Install mongodb
+  - Followed directions for `brew` install here: https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-os-x/#std-label-install
+  - Started service with `brew services start mongodb-community@8.0`
     
 KQ4PTJ, 73!
