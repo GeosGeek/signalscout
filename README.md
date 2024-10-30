@@ -16,20 +16,24 @@ Signal Scout fetches open source Ham and GMRS repeater data and displays it on a
 Signal Scout currently only includes VHF, UHF, and GMRS repeater information. Repeaters operating on any other band are not included.
 
 ## Future Imrpovements
+### Display
 - ~~Display all attributes for each repeater~~
 - ~~Display multiple reapeaters in same location with Leaflet.markerCluster~~
-- ~~Load GMRS repeater data for VA~~
-- Load Ham repeater data for multiple states
-- Dynamically load more repeater data
-  - Store multiple state's data in local db for quick display
-  - Make requests to Ham/GMRS APIs as needed when user pans/scrolls/zooms
-- Enable users to see all repeater attributes if desired
-
-## Features
-- Interactive map with Leaflet.js
-- Dynamic loading of local JSON data
-- Markers for each repeater location
-- Popup information for each marker
+- Enable users to explore more repeater attributes if desired
+### Data Storage
+- Load repeater data from local files 
+  - ~~Load GMRS repeater data for multiple states~~
+  - Load Ham repeater data for multiple states
+- Standup lightweight database locally
+  - Choose between Postgres/PostGIS, MongoDB/GeoJSON, or SQLite/SpatiaLite
+- Develop RESTful API to handle CRUD opertaions
+  - Implement with Express.js or similar
+  - Fetch data from API in main.js
+### Data Retrieval
+- Fetch data from APIs if not found locally
+  - Fetch only data within user's current map extent
+### Widgets
+- Enable users to select from variety of basemaps
 
 ## Data Sources
 - Liveine Central API
@@ -44,7 +48,15 @@ Before running the application, ensure you have the following installed:
   - Or Node.js (if you prefer to use `http-server`)
 
 ## Environment Setup
-- source ~./bashrc
-- http-server
-
+- `source ~.bashrc` Run this in home directory to set node environment variables
+- `http-server`
+- Install Docker (I used Docker Desktop since I'm on MacOS)
+  - `docker install mongo`
+  - `docker run --name mongodb -d -p 27017:27017 -v mongo-data:/data/db mongo`
+    - `--name mongodb` Names the container
+    - `-d` Runs the container in detached mode
+    - `-p 27017:27017` Maps the MongoDB port to your local machine
+    - `-v mongo-data:/data/db` Creates a Docker volume to persist data
+    - `docker exec -it mongodb mongo` Runs the mongodb container?
+    
 KQ4PTJ, 73!
