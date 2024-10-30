@@ -1,3 +1,6 @@
 .DS_Store
 /Leaflet.markercluster-1.4.1/
 repeaters_gmrs_bulk.json
+/node_modules/
+package-lock.json
+package.json
