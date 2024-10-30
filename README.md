@@ -50,5 +50,13 @@ Before running the application, ensure you have the following installed:
 ## Environment Setup
 - `source ~.bashrc` Run this in home directory to set node environment variables
 - `http-server`
-
+- Install Docker (I used Docker Desktop since I'm on MacOS)
+  - `docker install mongo`
+  - `docker run --name mongodb -d -p 27017:27017 -v mongo-data:/data/db mongo`
+    - `--name mongodb` Names the container
+    - `-d` Runs the container in detached mode
+    - `-p 27017:27017` Maps the MongoDB port to your local machine
+    - `-v mongo-data:/data/db` Creates a Docker volume to persist data
+    - `docker exec -it mongodb mongo` Runs the mongodb container?
+    
 KQ4PTJ, 73!
