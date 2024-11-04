@@ -61,5 +61,6 @@ Before running the application, ensure you have the following installed:
 - Install mongodb
   - Followed directions for `brew` install here: https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-os-x/#std-label-install
   - Started service with `brew services start mongodb-community@8.0`
-    
+  - Loaded JSON data to local mongodb instance using `mongoimport --db signalScout --collection gmrsRepeaters --file Documents/signalscout/data/repeaters_gmrs_bulk.json --jsonArray`
+  
 KQ4PTJ, 73!
