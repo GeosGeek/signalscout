@@ -19,45 +19,55 @@ mongoose.connect('mongodb://localhost:27017/signalScout', {
 
 // Define hamRepeater schema
 const hamSchema = new mongoose.Schema({
-    state: String,
-    city: String,
+    state: { type: mongoose.String, required: false },
+    city: mongoose.String,
     frequency: mongoose.Decimal128,
-    callsign: String,
-    offset: Int16Array,
-    notes: String,
+    callsign: mongoose.String,
+    offset: mongoose.Int16Array,
+    notes: mongoose.String,
     lat: mongoose.Decimal128,
     long: mongoose.Decimal128,
 });
 
 // Define gmrsRepeater schema
 const gmrsSchema = new mongoose.Schema({
-    id: Int32Array,
-    name: String,
-    location: String,
-    state: String,
-    modified: Date,
+    id: mongoose.Int16Array,
+    name: mongoose.String,
+    location: mongoose.String,
+    state: { type: mongoose.String, required: false },
+    modified: mongoose.Date,
     frequency: mongoose.Decimal128,
-    type: String,
-    owner: String,
-    ori: String,
-    travel: String,
-    status: String,
+    type: mongoose.String,
+    owner: mongoose.String,
+    ori: mongoose.String,
+    travel: mongoose.String,
+    status: mongoose.String,
     latitude: mongoose.Decimal128,
     latitude: mongoose.Decimal128,
-    network: String,
-    radius: Int16Array,
-    haat: String,
-    node: String,
+    network: mongoose.String,
+    radius: mongoose.Int16Array,
+    haat: mongoose.String,
+    node: mongoose.String,
 });
 
 // Create models
 const hamModel = mongoose.model('hamRepeaters', hamSchema)
 const gmrsModel = mongoose.model('gmrsRepeaters', gmrsSchema)
 
-// Route to read locations
-app.get('/ham_repeaters', async (req, res) => {
+// Route to read ham repeater data
+app.get('/api/ham_repeaters', async (req, res) => {
     try {
         const data = await hamModel.find(); // Fetch all documents
+        result.json(data);
+    } catch (error) {
+        result.status(500).json({ message: error.message });
+    }
+});
+
+// Route to read gmrs repeaters
+app.get('/api/gmrs_repeaters', async (req, res) => {
+    try {
+        const data = await gmrsModel.find(); // Fetch all documents
         result.json(data);
     } catch (error) {
         result.status(500).json({ message: error.message });
