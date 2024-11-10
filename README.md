@@ -24,16 +24,22 @@ Signal Scout currently only includes VHF, UHF, and GMRS repeater information. Re
 - Load repeater data from local files 
   - ~~Load GMRS repeater data for multiple states~~
   - Load Ham repeater data for multiple states
-- Standup lightweight database locally
-  - Choose between Postgres/PostGIS, MongoDB/GeoJSON, or SQLite/SpatiaLite
+- ~~Standup lightweight database locally~~
+  - ~~Choose between Postgres/PostGIS, MongoDB/GeoJSON, or SQLite/SpatiaLite~~
 - Develop RESTful API to handle CRUD opertaions
-  - Implement with Express.js or similar
-  - Fetch data from API in main.js
+  - ~~Implement with Express.js or similar~~
+  - ~~Fetch data from API in main.js~~
+  - Create
+  - ~~Read~~
+  - Update
+  - Delete
 ### Data Retrieval
 - Fetch data from APIs if not found locally
   - Fetch only data within user's current map extent
 ### Widgets
 - Enable users to select from variety of basemaps
+### Other
+- Leverage JS code standardization tool such as Prettier or ESLint
 
 ## Data Sources
 - Liveine Central API
@@ -61,7 +67,9 @@ Before running the application, ensure you have the following installed:
 - Install mongodb
   - Followed directions for `brew` install here: https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-os-x/#std-label-install
   - Started service with `brew services start mongodb-community@8.0`
-  - Loaded JSON data to local mongodb instance using `mongoimport --db signalScout --collection gmrsRepeaters --file Documents/signalscout/data/repeaters_gmrs_bulk.json --jsonArray`
+  - Loaded JSON data to local mongodb instance using `mongoimport --db signalScout --collection gmrsrepeaters --file Documents/signalscout/data/repeaters_gmrs_bulk.json --jsonArray`
+    - Suggest using only lowercase letters for collection names
+      - For some reason, upon creation of the mongoose schemas and models, the express server would be executed and create new collections with all lowercase, despite camel casing being used when creating the collection.
 
 ## Troubleshooting
 - If browser doesn't seem to us latest code, try:
