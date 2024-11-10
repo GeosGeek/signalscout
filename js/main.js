@@ -1,6 +1,4 @@
 // Initialize local data file paths
-const HAM_FILE = 'data/repeaters_ham.json'
-const GMRS_FILE = 'data/repeaters_gmrs_bulk.json'
 const HAM_ENDPOINT = 'http://localhost:3000/api/ham_repeaters'
 const GMRS_ENDPOINT = 'http://localhost:3000/api/gmrs_repeaters'
 
@@ -25,7 +23,7 @@ async function fetchData(apiUrl) {
     return await response.json();
 }
 
-fetch('http://localhost:3000/api/ham_repeaters')
+fetch(HAM_ENDPOINT)
     .then(response => response.json())
     .then(data => {
         data.forEach(repeater => {
@@ -47,4 +45,28 @@ fetch('http://localhost:3000/api/ham_repeaters')
         });
         map.addLayer(markers); // Add cluster layer to map
     })
-    .catch(error => console.error('Error fetch data:', error));
+    .catch(error => console.error('Error fetching data:', error));
+
+
+fetch(GMRS_ENDPOINT)
+    .then(response => response.json())
+    .then(data => {
+        data.forEach(repeater => {
+            const { Name, State, Latitude, Longitude, Frequency, Type, Status } = repeater;
+
+            const marker = L.circleMarker([Latitude, Longitude], {
+                radius: 8, fillColor: "#FF0000", color: "#000000",
+                weight: 1, opacity: 1, fillOpacity: 0.8
+            }).bindPopup(
+                `<strong>${Name || "Name Unknown"}</strong><br>
+                Frequency: ${Frequency}<br>
+                Type: ${Type}<br>
+                Status: ${Status}<br>
+                License: GMRS
+            `); // Add a popup with GMRS repeater info
+            
+            markers.addLayer(marker); // Add marker to the cluster
+        });
+        map.addLayer(markers); // Add cluster layer to map
+    })
+    .catch(error => console.error('Error fetching data:', error));
