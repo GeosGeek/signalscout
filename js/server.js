@@ -1,5 +1,5 @@
-const HAM_DATA = '/data/ham_repeaters'
-const GMRS_DATA = '/data/gmrs_repeaters'
+const HAM_DATA = '/api/ham_repeaters'
+const GMRS_DATA = '/api/gmrs_repeaters'
 
 const express = require('express');
 const mongoose = require('mongoose');
@@ -12,50 +12,49 @@ app.use(cors());
 app.use(express.json());
 
 // MongoDB Connection
-mongoose.connect('mongodb://localhost:27017/signalScout', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-});
+mongoose.connect('mongodb://localhost:27017/signalScout')
+    .then(() => console.log('Connected to MongoDB!'))
+    .catch((error) => console.log('MongoDB connection error: ', error));
 
 // Define hamRepeater schema
 const hamSchema = new mongoose.Schema({
-    state: { type: mongoose.String, required: false },
-    city: mongoose.String,
-    frequency: mongoose.Decimal128,
-    callsign: mongoose.String,
-    offset: mongoose.Int16Array,
-    notes: mongoose.String,
-    lat: mongoose.Decimal128,
-    long: mongoose.Decimal128,
+    state: { type: mongoose.Schema.Types.String, required: false },
+    city: { type: mongoose.Schema.Types.String, required: false },
+    frequency: { type: mongoose.Schema.Types.Number, required: false },
+    callsign: { type: mongoose.Schema.Types.String, required: false }, 
+    offset: { type: mongoose.Schema.Types.Number, required: false },
+    notes: { type: mongoose.Schema.Types.String, required: false },
+    lat: { type: mongoose.Schema.Types.Number, required: false },
+    long: {type: mongoose.Schema.Types.Number, required: false },
 });
 
 // Define gmrsRepeater schema
 const gmrsSchema = new mongoose.Schema({
-    id: mongoose.Int16Array,
-    name: mongoose.String,
-    location: mongoose.String,
-    state: { type: mongoose.String, required: false },
-    modified: mongoose.Date,
-    frequency: mongoose.Decimal128,
-    type: mongoose.String,
-    owner: mongoose.String,
-    ori: mongoose.String,
-    travel: mongoose.String,
-    status: mongoose.String,
-    latitude: mongoose.Decimal128,
-    latitude: mongoose.Decimal128,
-    network: mongoose.String,
-    radius: mongoose.Int16Array,
-    haat: mongoose.String,
-    node: mongoose.String,
+    id: { type: mongoose.Schema.Types.Number, required: false },
+    name: { type: mongoose.Schema.Types.String, required: false },
+    location: { type: mongoose.Schema.Types.String, required: false },
+    state: { type: mongoose.Schema.Types.String, required: false },
+    modified: { type: mongoose.Schema.Types.Date, required: false },
+    frequency: { type: mongoose.Schema.Types.Number, required: false },
+    type: { type: mongoose.Schema.Types.String, required: false },
+    owner: { type: mongoose.Schema.Types.String, required: false },
+    ori: { type: mongoose.Schema.Types.String, required: false },
+    travel: { type: mongoose.Schema.Types.String, required: false },
+    status: { type: mongoose.Schema.Types.String, required: false },
+    latitude: { type: mongoose.Schema.Types.Number, required: false },
+    latitude: { type: mongoose.Schema.Types.Number, required: false },
+    network: { type: mongoose.Schema.Types.String, required: false },
+    radius: { type: mongoose.Schema.Types.Number, required: false },
+    haat: { type: mongoose.Schema.Types.String, required: false },
+    node: { type: mongoose.Schema.Types.String, required: false },
 });
 
 // Create models
-const hamModel = mongoose.model('hamRepeaters', hamSchema)
-const gmrsModel = mongoose.model('gmrsRepeaters', gmrsSchema)
+const hamModel = mongoose.model('hamrepeaters', hamSchema)
+const gmrsModel = mongoose.model('gmrsrepeaters', gmrsSchema)
 
 // Route to read ham repeater data
-app.get('/api/ham_repeaters', async (req, res) => {
+app.get(HAM_DATA, async (req, result) => {
     try {
         const data = await hamModel.find(); // Fetch all documents
         result.json(data);
@@ -65,7 +64,7 @@ app.get('/api/ham_repeaters', async (req, res) => {
 });
 
 // Route to read gmrs repeaters
-app.get('/api/gmrs_repeaters', async (req, res) => {
+app.get(GMRS_DATA, async (req, result) => {
     try {
         const data = await gmrsModel.find(); // Fetch all documents
         result.json(data);
@@ -75,5 +74,5 @@ app.get('/api/gmrs_repeaters', async (req, res) => {
 });
 
 app.listen(PORT, () => {
-    console.log('Server running on http://localahost:${PORT}');
+    console.log(`Server running on http://localhost:${PORT}`);
 });
