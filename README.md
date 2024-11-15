@@ -38,6 +38,7 @@ Signal Scout currently only includes VHF, UHF, and GMRS repeater information. Re
 - Enable users to select from variety of basemaps
 ### Other
 - Convert code base to Typescript
+- Automate deployment of Signal Scout
 - Leverage JS code standardization tool such as Prettier or ESLint
 
 ## Data Sources
