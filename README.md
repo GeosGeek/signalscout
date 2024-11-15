@@ -29,20 +29,20 @@ Signal Scout currently only includes VHF, UHF, and GMRS repeater information. Re
 - Develop RESTful API to handle CRUD opertaions
   - ~~Implement with Express.js or similar~~
   - ~~Fetch data from API in main.js~~
-  - Create
-  - ~~Read~~
-  - Update
-  - Delete
+  - Create, ~~Read~~, Update, Delete
 ### Data Retrieval
 - Fetch data from APIs if not found locally
   - Fetch only data within user's current map extent
 ### Widgets
+#### Explore React Leaflet
 - Enable users to select from variety of basemaps
 ### Other
+- Convert code base to Typescript
+- Automate deployment of Signal Scout
 - Leverage JS code standardization tool such as Prettier or ESLint
 
 ## Data Sources
-- Liveine Central API
+- Levine Central API
   - https://www.levinecentral.com/repeaters/repeater_fetch.php?
 - MyGMRS API
   - https://api.mygmrs.com/repeaters?

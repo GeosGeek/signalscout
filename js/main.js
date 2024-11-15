@@ -3,7 +3,7 @@ const HAM_ENDPOINT = 'http://localhost:3000/api/ham_repeaters'
 const GMRS_ENDPOINT = 'http://localhost:3000/api/gmrs_repeaters'
 
 // Initialize the Leaflet map
-const map = L.map('map').setView([38.95, -77.45], 10); // Centering on Dulles Airport
+const map = L.map('map').setView([39.0, -78.3], 7); // Centering on Dulles Airport
 
 // Add OpenStreetMap tile layer
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
