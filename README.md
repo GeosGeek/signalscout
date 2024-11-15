@@ -34,6 +34,7 @@ Signal Scout currently only includes VHF, UHF, and GMRS repeater information. Re
 - Fetch data from APIs if not found locally
   - Fetch only data within user's current map extent
 ### Widgets
+#### Explore React Leaflet
 - Enable users to select from variety of basemaps
 ### Other
 - Leverage JS code standardization tool such as Prettier or ESLint
