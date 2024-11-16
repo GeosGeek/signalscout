@@ -42,10 +42,12 @@ Signal Scout currently only includes VHF, UHF, and GMRS repeater information. Re
 - Leverage JS code standardization tool such as Prettier or ESLint
 
 ## Data Sources
-- Levine Central API
-  - https://www.levinecentral.com/repeaters/repeater_fetch.php?
-- MyGMRS API
-  - https://api.mygmrs.com/repeaters?
+- Levine Central API (ham repeaters)
+  - https://www.levinecentral.com/repeaters/repeater_fetch.php
+- MyGMRS API (GMRS repeaters)
+  - https://api.mygmrs.com/repeaters
+- Packet Radio Map (digipeaters for digital packet transmissions)
+  - https://geo.packetradiomap.com/geoserver/web/
 
 ## Prerequisites
 Before running the application, ensure you have the following installed:
