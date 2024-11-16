@@ -46,7 +46,7 @@ Signal Scout currently only includes VHF, UHF, and GMRS repeater information. Re
   - https://www.levinecentral.com/repeaters/repeater_fetch.php
 - MyGMRS API (GMRS repeaters)
   - https://api.mygmrs.com/repeaters
-- Packet Radio Map (digipeaters for digital packet transmissions)
+- Packet Radio Map (geoserver for digipeaters)
   - https://geo.packetradiomap.com/geoserver/web/
 
 ## Prerequisites
