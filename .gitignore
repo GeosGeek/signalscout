@@ -5,3 +5,5 @@ repeaters_gmrs_bulk.json
 package-lock.json
 package.json
 /data/repeaters_ham_bulk.json
+/data/repeaters_digipeaters.geojson
+/data/repeaters_digipeaters.json
