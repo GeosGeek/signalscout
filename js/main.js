@@ -76,18 +76,13 @@ fetch(DIGI_ENDPOINT)
     .then(response => response.json())
     .then(data => {
         data.forEach(repeater => {
-            const { _id, type, id, geometry, coordinates, geometry_name, properties, parent_call, call, lastheard, grid, heard, ssid, last_port, uid, ports } = repeater;
-
-            const marker = L.circleMarker([geometry.coordinates[1], geometry.coordinates[0]], {
-                radius: 8, fillColor: "#008000", color: "#000000",
-                weight: 1, opacity: 1, fillOpacity: 0.8
-            }).bindPopup(
-                `<strong>${call || "Name Unknown"}</strong><br>
-                Frequency: ${ports}<br>
-                Grid: ${grid}<br>
-            `); // Add a popup with digirepeater info
-            
-            markers.addLayer(marker); // Add marker to the cluster
+            L.geoJSON(data, {
+                onEachFeature: function (feature, layer) {
+                    // Create the popup content
+                    const popupContent = `<strong>Call Sign:</strong> ${feature.properties.call}`;
+                    layer.bindPopup(popupContent);  
+                }
+            }).addTo(map);
         })
     })
     .catch(error => console.error('Error fetching data:', error));
