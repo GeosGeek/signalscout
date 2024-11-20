@@ -1,6 +1,7 @@
 // Initialize local data file paths
 const HAM_ENDPOINT = 'http://localhost:3000/api/ham_repeaters'
 const GMRS_ENDPOINT = 'http://localhost:3000/api/gmrs_repeaters'
+const DIGI_ENDPOINT = 'http://localhost:3000/api/digipeaters'
 
 // Initialize the Leaflet map
 const map = L.map('map').setView([39.0, -78.3], 7); // Centering on Dulles Airport
@@ -68,5 +69,25 @@ fetch(GMRS_ENDPOINT)
             markers.addLayer(marker); // Add marker to the cluster
         });
         map.addLayer(markers); // Add cluster layer to map
+    })
+    .catch(error => console.error('Error fetching data:', error));
+
+fetch(DIGI_ENDPOINT)
+    .then(response => response.json())
+    .then(data => {
+        data.forEach(repeater => {
+            const { _id, type, id, geometry, coordinates, geometry_name, properties, parent_call, call, lastheard, grid, heard, ssid, last_port, uid, ports } = repeater;
+
+            const marker = L.circleMarker([geometry.coordinates[1], geometry.coordinates[0]], {
+                radius: 8, fillColor: "#008000", color: "#000000",
+                weight: 1, opacity: 1, fillOpacity: 0.8
+            }).bindPopup(
+                `<strong>${call || "Name Unknown"}</strong><br>
+                Frequency: ${ports}<br>
+                Grid: ${grid}<br>
+            `); // Add a popup with digirepeater info
+            
+            markers.addLayer(marker); // Add marker to the cluster
+        })
     })
     .catch(error => console.error('Error fetching data:', error));
