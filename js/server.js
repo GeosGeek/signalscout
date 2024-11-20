@@ -66,7 +66,7 @@ const digiPropsSchema = new mongoose.Schema({
 });
   
 // Define the schema for the "geometry" object
-const geometrySchema = new Schema({
+const geometrySchema = new mongoose.Schema({
     type: { type: String, required: true },
     coordinates: {
       type: [Number], // Array of numbers representing the coordinates
@@ -75,13 +75,13 @@ const geometrySchema = new Schema({
 });
   
 // Define the main schema
-const digiSchema = new Schema({
+const digiSchema = new mongoose.Schema({
     _id: { type: mongoose.Schema.Types.ObjectId, required: true },
     type: { type: String, required: true },
     id: { type: String, required: true },
     geometry: { type: geometrySchema, required: true },
     geometry_name: { type: String, required: true },
-    properties: { type: propertiesSchema, required: true },
+    properties: { type: digiPropsSchema, required: true },
 });
 
 // Create models
