@@ -75,14 +75,35 @@ fetch(GMRS_ENDPOINT)
 fetch(DIGI_ENDPOINT)
     .then(response => response.json())
     .then(data => {
-        data.forEach(repeater => {
-            L.geoJSON(data, {
-                onEachFeature: function (feature, layer) {
-                    // Create the popup content
-                    const popupContent = `<strong>Call Sign:</strong> ${feature.properties.call}`;
-                    layer.bindPopup(popupContent);  
-                }
-            }).addTo(map);
+        // Use L.geoJSON to plot the data on the map and add popups to the marker cluster
+        L.geoJSON(data, {
+            onEachFeature: function (feature, layer) {
+              // Check if properties are available
+              if (feature.properties) {
+                // Create a popup content from digipeater properties
+                const popupContent = `
+                  <strong>Call Sign:</strong> ${feature.properties.call}<br>
+                  <strong>Last Heard:</strong> ${feature.properties.lastheard}<br>
+                  <strong>Port:</strong> ${feature.properties.ports}<br>
+                  <strong>Grid:</strong> ${feature.properties.grid}<br>
+                  <strong>SSID:</strong> ${feature.properties.ssid || 'N/A'}<br>
+                  <strong>Heard:</strong> ${feature.properties.heard ? 'Yes' : 'No'}
+                `;
+                layer.bindPopup(popupContent); // Bind the popup to the marker
+              }
+  
+              markers.addLayer(layer); // Add the layer to the MarkerClusterGroup
+            },
+            pointToLayer: function (feature, latlng) {
+                return L.circleMarker(latlng, {
+                  radius: 8,
+                  color: 'orange',
+                  weight: 1,
+                  opacity: 1,
+                  fillOpacity: 0.8
+                });
+              }
+          });
+          map.addLayer(markers); // Add the MarkerClusterGroup to the map
         })
-    })
     .catch(error => console.error('Error fetching data:', error));
