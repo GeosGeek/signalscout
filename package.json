@@ -1,0 +1,18 @@
+{
+  "name": "signalscout",
+  "version": "1.0.0",
+  "description": "Scout public radio signal anywhere",
+  "main": "index.js",
+  "scripts": {
+    "start": "node js/server.js & http-server --cors",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["radio", "ham", "gmrs", "digipeater", "repeater", "amateur radio"],
+  "author": "GeosGeek",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.1",
+    "mongoose": "^8.7.3"
+  }
+}
