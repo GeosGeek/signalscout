@@ -6,8 +6,7 @@ Before running the application, ensure you have the following installed:
 
 ## Local Deployment
 - `source ~.bashrc` Run this in home directory to set node environment variables
-- `http-server`
-- `node js/server.js`
+- `npm start` inside signalscout directory. This references the `start` command in package.json which deploys the `http-server` and establishes connection with `mongodb`.
 
 ## Environment Setup
 - Install Docker (I used Docker Desktop since I'm on MacOS)
