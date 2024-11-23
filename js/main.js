@@ -32,8 +32,12 @@ fetch(HAM_ENDPOINT)
     
             // Create a marker for each repeater
             const marker = L.circleMarker([lat, lon], {
-                radius: 8, fillColor: "#0000FF", color: "#000000",
-                weight: 1, opacity: 1, fillOpacity: 0.8
+                radius: 8,
+                fillColor: "red",
+                color: "black",
+                weight: 1,
+                opacity: 1,
+                fillOpacity: 0.8
             }).bindPopup(`
                 <strong>${Callsign || "Callsign Unknown"}</strong><br>
                 ${City + ", " + State}<br>
@@ -56,8 +60,12 @@ fetch(GMRS_ENDPOINT)
             const { Name, State, Latitude, Longitude, Frequency, Type, Status } = repeater;
 
             const marker = L.circleMarker([Latitude, Longitude], {
-                radius: 8, fillColor: "#FF0000", color: "#000000",
-                weight: 1, opacity: 1, fillOpacity: 0.8
+                radius: 8,
+                fillColor: "blue",
+                color: "black",
+                weight: 1,
+                opacity: 1,
+                fillOpacity: 0.8
             }).bindPopup(
                 `<strong>${Name || "Name Unknown"}</strong><br>
                 Frequency: ${Frequency}<br>
@@ -82,12 +90,12 @@ fetch(DIGI_ENDPOINT)
               if (feature.properties) {
                 // Create a popup content from digipeater properties
                 const popupContent = `
-                  <strong>Call Sign:</strong> ${feature.properties.call}<br>
-                  <strong>Last Heard:</strong> ${feature.properties.lastheard}<br>
-                  <strong>Port:</strong> ${feature.properties.ports}<br>
-                  <strong>Grid:</strong> ${feature.properties.grid}<br>
-                  <strong>SSID:</strong> ${feature.properties.ssid || 'N/A'}<br>
-                  <strong>Heard:</strong> ${feature.properties.heard ? 'Yes' : 'No'}
+                  <strong>${feature.properties.call}</strong><br>
+                  Last Heard: ${feature.properties.lastheard}<br>
+                  Port: ${feature.properties.ports}<br>
+                  Grid: ${feature.properties.grid}<br>
+                  SSID: ${feature.properties.ssid || 'N/A'}<br>
+                  Heard: ${feature.properties.heard ? 'Yes' : 'No'}
                 `;
                 layer.bindPopup(popupContent); // Bind the popup to the marker
               }
@@ -97,7 +105,8 @@ fetch(DIGI_ENDPOINT)
             pointToLayer: function (feature, latlng) {
                 return L.circleMarker(latlng, {
                   radius: 8,
-                  color: 'orange',
+                  color: 'black',
+                  fillColor: 'orange',
                   weight: 1,
                   opacity: 1,
                   fillOpacity: 0.8
