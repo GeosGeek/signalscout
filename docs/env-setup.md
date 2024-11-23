@@ -4,9 +4,12 @@ Before running the application, ensure you have the following installed:
 - Python (for running a local server)
   - Or Node.js (if you prefer to use `http-server`)
 
-## Environment Setup
+## Local Deployment
 - `source ~.bashrc` Run this in home directory to set node environment variables
 - `http-server`
+- `node js/server.js`
+
+## Environment Setup
 - Install Docker (I used Docker Desktop since I'm on MacOS)
   - `docker install mongo`
   - `docker run --name mongodb -d -p 27017:27017 -v mongo-data:/data/db mongo`
