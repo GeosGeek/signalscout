@@ -33,7 +33,7 @@ fetch(HAM_ENDPOINT)
             // Create a marker for each repeater
             const marker = L.circleMarker([lat, lon], {
                 radius: 8,
-                fillColor: "red",
+                fillColor: "blue",
                 color: "black",
                 weight: 1,
                 opacity: 1,
@@ -61,7 +61,7 @@ fetch(GMRS_ENDPOINT)
 
             const marker = L.circleMarker([Latitude, Longitude], {
                 radius: 8,
-                fillColor: "blue",
+                fillColor: "red",
                 color: "black",
                 weight: 1,
                 opacity: 1,
