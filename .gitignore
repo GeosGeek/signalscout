@@ -3,7 +3,6 @@
 repeaters_gmrs_bulk.json
 /node_modules/
 package-lock.json
-package.json
 /data/repeaters_ham_bulk.json
 /data/repeaters_digipeaters.geojson
 /data/repeaters_digipeaters.json
