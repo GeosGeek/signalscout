@@ -2,7 +2,7 @@
 
 Ham and GMRS repeaters in one map! Signal Scout aims to reduce time and effort required for radio users to select their loadout.
 
-![Snip of SignalScout UI](./signalscout-page.png)
+![Signal Scout Demo](./signal_scout_demo.gif)
 
 ## Overview
 
