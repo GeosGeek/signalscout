@@ -89,6 +89,11 @@ const hamModel = mongoose.model('hamrepeaters', hamSchema)
 const gmrsModel = mongoose.model('gmrsrepeaters', gmrsSchema)
 const digiModel = mongoose.model('digipeaters', digiSchema)
 
+// Serve HTML file
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, '../index.html'));
+});
+
 // Route to read ham repeater data
 app.get(HAM_DATA, async (req, result) => {
     try {
