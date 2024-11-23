@@ -85,24 +85,23 @@ fetch(DIGI_ENDPOINT)
     .then(data => {
         // Use L.geoJSON to plot the data on the map and add popups to the marker cluster
         L.geoJSON(data, {
-            onEachFeature: function (feature, layer) {
+            onEachFeature: function (digipeater, digi_layer) {
               // Check if properties are available
-              if (feature.properties) {
+              if (digipeater.properties) {
                 // Create a popup content from digipeater properties
                 const popupContent = `
-                  <strong>${feature.properties.call}</strong><br>
-                  Last Heard: ${feature.properties.lastheard}<br>
-                  Port: ${feature.properties.ports}<br>
-                  Grid: ${feature.properties.grid}<br>
-                  SSID: ${feature.properties.ssid || 'N/A'}<br>
-                  Heard: ${feature.properties.heard ? 'Yes' : 'No'}
+                  <strong>${digipeater.properties.call}</strong><br>
+                  Last Heard: ${digipeater.properties.lastheard}<br>
+                  Last Port: ${digipeater.properties.last_port}<br>
+                  Grid: ${digipeater.properties.grid}<br>
+                  SSID: ${digipeater.properties.ssid || 'N/A'}<br>
+                  Heard: ${digipeater.properties.heard ? 'Yes' : 'No'}
                 `;
-                layer.bindPopup(popupContent); // Bind the popup to the marker
+                digi_layer.bindPopup(popupContent); // Bind the popup to the marker
               }
-  
-              markers.addLayer(layer); // Add the layer to the MarkerClusterGroup
+              markers.addLayer(digi_layer); // Add the digi_layer to the MarkerClusterGroup
             },
-            pointToLayer: function (feature, latlng) {
+            pointToLayer: function (digipeater, latlng) {
                 return L.circleMarker(latlng, {
                   radius: 8,
                   color: 'black',
