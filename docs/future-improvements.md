@@ -18,8 +18,14 @@
   - Fetch only data within user's current map extent
 ### Widgets
 - Toggle various repeater layers on/off (HAM/GMRS/DIGI)
-#### Explore React Leaflet
 - Enable users to select from variety of basemaps
+#### Platform Migration
+- Convert current code to React Leaflet component-based implementation
+- Deploy Signal Scout as a React App
+- Convert code base to TypeScript
+- Wireframe mobile device UI
+### Features
+- Enable mobile users to download data by state, repeater type and store locally on device
 ### Other
 - Leverage JS code standardization tool such as Prettier or ESLint
 - Create a logo for Signal Scout
