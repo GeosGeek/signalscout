@@ -13,7 +13,11 @@ Signal Scout displays both Ham and GMRS repeater locations, so operators can cho
 Signal Scout fetches open source Ham and GMRS repeater data and displays it on a Leaflet map. Each marker represents a repeater, with details shown in a popup when clicked.
 
 ## Repeater Frequencies / Bands
-Signal Scout currently only includes VHF, UHF, and GMRS repeater information. Repeaters operating on any other band are not included.
+Signal Scout currently only includes VHF, UHF, GMRS, and digital repeater information. Repeaters operating on any other band are not included (HF). Approximate frequencies for repeaters in Signal Scout are below.
+  - Digi = 145 Mhz (digital packet repeaters)
+  - VHF = 146 Mhz
+  - UHF = 440 Mhz
+  - GMRS = 462 Mhz
 
 
 ## Data Sources
