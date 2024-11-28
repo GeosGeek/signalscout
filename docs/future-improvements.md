@@ -1,4 +1,4 @@
-## Future Imrpovements
+# Future Improvements
 ### Display
 - ~~Display all attributes for each repeater~~
 - ~~Display multiple reapeaters in same location with Leaflet.markerCluster~~
@@ -19,7 +19,7 @@
 ### Widgets
 - Toggle various repeater layers on/off (HAM/GMRS/DIGI)
 - Enable users to select from variety of basemaps
-#### Platform Migration
+### Platform Migration
 - Convert current code to React Leaflet component-based implementation
 - Deploy Signal Scout as a React App
 - Convert code base to TypeScript
