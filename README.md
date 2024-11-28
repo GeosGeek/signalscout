@@ -6,9 +6,9 @@ Ham and GMRS repeaters in one map! Signal Scout aims to reduce time and effort r
 
 ## Overview
 
-Outdoor enthusiasts use handheld radios to communicate with friends, family, or even emergency services. Their tools of choice are often FRS, GMRS, or Ham radios. Although the latter two options require an FCC license to transmit, they enable operators to use repeaters, significantly increasing the transmission range of a low-power handheld radio.
+Outdoor enthusiasts often use handheld radios to communicate with friends, family, or even emergency services. Their tools of choice are often FRS, GMRS, or Ham radios. Although the latter two options require an FCC license to transmit, they enable operators to use repeaters, significantly increasing the transmission range of a low-power handheld radio.
 
-Signal Scout displays both Ham and GMRS repeater locations, so operators can choose their loadout accordingly.
+Signal Scout offers a comprehensive overview of public radio signal across the United States by integrating multiple data sources into one simple map which enables radio operators to choose their loadout accordingly.
 
 Signal Scout fetches open source Ham and GMRS repeater data and displays it on a Leaflet map. Each marker represents a repeater, with details shown in a popup when clicked.
 
