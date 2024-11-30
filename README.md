@@ -1,6 +1,6 @@
 # Signal Scout - scout public radio signal anywhere!
 
-Ham and GMRS repeaters in one map! Signal Scout aims to reduce time and effort required for radio users to select their loadout.
+Ham, GMRS, and digital packet repeaters in one map! Signal Scout aims to reduce time and effort required for radio users to select their loadout by providing multiple data sources in a single application.
 
 ![Signal Scout Demo](./signal_scout_demo.gif)
 
