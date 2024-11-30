@@ -12,82 +12,15 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
+// Import custom data models
+const hamModel = require('../models/hamModel');
+const gmrsModel = require('../models/gmrsModel');
+const digiModel = require('../models/digiModel');
+
 // MongoDB Connection
 mongoose.connect('mongodb://localhost:27017/signalScout')
     .then(() => console.log('Connected to MongoDB!'))
     .catch((error) => console.log('MongoDB connection error: ', error));
-
-// Define hamRepeater schema
-const hamSchema = new mongoose.Schema({
-    state: { type: mongoose.Schema.Types.String, required: false },
-    city: { type: mongoose.Schema.Types.String, required: false },
-    frequency: { type: mongoose.Schema.Types.Number, required: false },
-    callsign: { type: mongoose.Schema.Types.String, required: false }, 
-    offset: { type: mongoose.Schema.Types.Number, required: false },
-    notes: { type: mongoose.Schema.Types.String, required: false },
-    lat: { type: mongoose.Schema.Types.Number, required: false },
-    long: {type: mongoose.Schema.Types.Number, required: false },
-});
-
-// Define gmrsRepeater schema
-const gmrsSchema = new mongoose.Schema({
-    id: { type: mongoose.Schema.Types.Number, required: false },
-    name: { type: mongoose.Schema.Types.String, required: false },
-    location: { type: mongoose.Schema.Types.String, required: false },
-    state: { type: mongoose.Schema.Types.String, required: false },
-    modified: { type: mongoose.Schema.Types.Date, required: false },
-    frequency: { type: mongoose.Schema.Types.Number, required: false },
-    type: { type: mongoose.Schema.Types.String, required: false },
-    owner: { type: mongoose.Schema.Types.String, required: false },
-    ori: { type: mongoose.Schema.Types.String, required: false },
-    travel: { type: mongoose.Schema.Types.String, required: false },
-    status: { type: mongoose.Schema.Types.String, required: false },
-    latitude: { type: mongoose.Schema.Types.Number, required: false },
-    latitude: { type: mongoose.Schema.Types.Number, required: false },
-    network: { type: mongoose.Schema.Types.String, required: false },
-    radius: { type: mongoose.Schema.Types.Number, required: false },
-    haat: { type: mongoose.Schema.Types.String, required: false },
-    node: { type: mongoose.Schema.Types.String, required: false },
-});
-
-
-// Define the schema for the "properties" object
-const digiPropsSchema = new mongoose.Schema({
-    id: { type: Number, required: true },
-    parent_call: { type: String, required: true },
-    call: { type: String, required: true },
-    lastheard: { type: Date, required: true },
-    grid: { type: String, required: true },
-    heard: { type: Boolean, required: true },
-    ssid: { type: String, default: null },
-    last_port: { type: String, required: true },
-    uid: { type: String, required: true },
-    ports: { type: String, required: true },
-});
-  
-// Define the schema for the "geometry" object
-const geometrySchema = new mongoose.Schema({
-    type: { type: String, required: true },
-    coordinates: {
-      type: [Number], // Array of numbers representing the coordinates
-      required: true,
-    },
-});
-  
-// Define the main schema
-const digiSchema = new mongoose.Schema({
-    _id: { type: mongoose.Schema.Types.ObjectId, required: true },
-    type: { type: String, required: true },
-    id: { type: String, required: true },
-    geometry: { type: geometrySchema, required: true },
-    geometry_name: { type: String, required: true },
-    properties: { type: digiPropsSchema, required: true },
-});
-
-// Create models
-const hamModel = mongoose.model('hamrepeaters', hamSchema)
-const gmrsModel = mongoose.model('gmrsrepeaters', gmrsSchema)
-const digiModel = mongoose.model('digipeaters', digiSchema)
 
 // Serve HTML file
 app.get('/', (req, res) => {
