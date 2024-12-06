@@ -3,6 +3,7 @@
 - ~~Display all attributes for each repeater~~
 - ~~Display multiple reapeaters in same location with Leaflet.markerCluster~~
 - Enable users to explore more repeater attributes if desired
+- Visualized linked repeater systems with lines between each node (reqruies Repeaterbook data)
 ### Data Storage
 - ~~Load repeater data from local files~~
   - ~~Load GMRS repeater data for multiple states~~
