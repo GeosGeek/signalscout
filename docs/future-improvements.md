@@ -3,7 +3,7 @@
 - ~~Display all attributes for each repeater~~
 - ~~Display multiple reapeaters in same location with Leaflet.markerCluster~~
 - Enable users to explore more repeater attributes if desired
-- Visualize linked repeater systems with lines between each node (reqruies Repeaterbook data)
+- Visualize linked repeater systems with lines between each node (requires Repeaterbook data)
 ### Data Storage
 - ~~Load repeater data from local files~~
   - ~~Load GMRS repeater data for multiple states~~
@@ -15,6 +15,8 @@
   - ~~Fetch data from API in main.js~~
   - Create, ~~Read~~, Update, Delete
 ### Data Retrieval
+- Enable on-demand data fetching
+- Setup `cron` job to periodically check for new data
 - Fetch data from APIs if not found locally
   - Fetch only data within user's current map extent
 ### Widgets
