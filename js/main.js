@@ -28,8 +28,7 @@ fetch(HAM_ENDPOINT)
     .then(response => response.json())
     .then(data => {
         data.forEach(repeater => {
-            const { State, City, Frequency, Callsign, Offset, Notes, lat, lon } = repeater;
-    
+            const { state, city, frequency, callsign, offset, notes, lat, lon } = repeater;
             // Create a marker for each repeater
             const marker = L.circleMarker([lat, lon], {
                 radius: 8,
@@ -39,13 +38,12 @@ fetch(HAM_ENDPOINT)
                 opacity: 1,
                 fillOpacity: 0.8
             }).bindPopup(`
-                <strong>${Callsign || "Callsign Unknown"}</strong><br>
-                ${City + ", " + State}<br>
-                Frequency: ${Frequency + Offset || "N/A"}<br>
-                CTCSS: ${Notes || "N/A"}<br>
+                <strong>${callsign || "Callsign Unknown"}</strong><br>
+                ${city + ", " + state}<br>
+                Frequency: ${frequency + offset || "N/A"}<br>
+                Notes: ${notes || "N/A"}<br>
                 License: Ham
             `); // Add a popup with Ham repeater info
-            
             markers.addLayer(marker); // Add marker to the cluster
         });
         map.addLayer(markers); // Add cluster layer to map
@@ -57,7 +55,7 @@ fetch(GMRS_ENDPOINT)
     .then(response => response.json())
     .then(data => {
         data.forEach(repeater => {
-            const { Name, State, Latitude, Longitude, Frequency, Type, Status } = repeater;
+            const { name, state, Latitude, Longitude, frequency, type, status } = repeater;
 
             const marker = L.circleMarker([Latitude, Longitude], {
                 radius: 8,
@@ -67,13 +65,12 @@ fetch(GMRS_ENDPOINT)
                 opacity: 1,
                 fillOpacity: 0.8
             }).bindPopup(
-                `<strong>${Name || "Name Unknown"}</strong><br>
-                Frequency: ${Frequency}<br>
-                Type: ${Type}<br>
-                Status: ${Status}<br>
+                `<strong>${name || "Name Unknown"}</strong><br>
+                Frequency: ${frequency}<br>
+                Type: ${type}<br>
+                Status: ${status}<br>
                 License: GMRS
             `); // Add a popup with GMRS repeater info
-            
             markers.addLayer(marker); // Add marker to the cluster
         });
         map.addLayer(markers); // Add cluster layer to map
@@ -83,12 +80,12 @@ fetch(GMRS_ENDPOINT)
 fetch(DIGI_ENDPOINT)
     .then(response => response.json())
     .then(data => {
-        // Use L.geoJSON to plot the data on the map and add popups to the marker cluster
+        // Unpack the GeoJSON objects
         L.geoJSON(data, {
             onEachFeature: function (digipeater, digi_layer) {
               // Check if properties are available
               if (digipeater.properties) {
-                // Create a popup content from digipeater properties
+                // Create popup content from properties
                 const popupContent = `
                   <strong>${digipeater.properties.call}</strong><br>
                   Last Heard: ${digipeater.properties.lastheard}<br>
