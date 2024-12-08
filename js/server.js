@@ -27,6 +27,33 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../index.html'));
 });
 
+// Create ham repeaters
+app.post(HAM_DATA, async (req, res) => {
+    try {
+        const { state, city, frequency, callsign, offset, notes, lat, lon } = req.body;
+        // Validate input
+        if (!lat || !lon || !frequency) {
+            return res.status(400).json({ error: 'Invalid data' });
+        }
+        // Store validated record in corresponding mongo model
+        const newRepeater = new hamModel({
+            state,
+            city,
+            frequency,
+            callsign,
+            offset,
+            notes,
+            lat,
+            lon,
+        });
+       // Save new record to mongo
+       const savedRepeater = await newRepeater.save();
+       res.status(201).json(savedRepeater);
+    } catch (err) {
+        res.status(500).json({ error: 'Failed to create data' });
+    }
+});
+
 // Route to read ham repeater data
 app.get(HAM_DATA, async (req, result) => {
     try {
