@@ -15,7 +15,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 // Create a Leaflet.markerClusterGroup
 const markers = L.markerClusterGroup();
 
-// Function to request data from any API
+// Function to request data from an API
 async function fetchData(apiUrl) {
     const response = await fetch(apiUrl);
     if (!response.ok) {
@@ -28,7 +28,7 @@ fetch(HAM_ENDPOINT)
     .then(response => response.json())
     .then(data => {
         data.forEach(repeater => {
-            const { state, city, frequency, callsign, offset, notes, lat, lon } = repeater;
+            const { State, City, Frequency, Callsign, Offset, Notes, lat, lon } = repeater;
             // Create a marker for each repeater
             const marker = L.circleMarker([lat, lon], {
                 radius: 8,
@@ -38,10 +38,10 @@ fetch(HAM_ENDPOINT)
                 opacity: 1,
                 fillOpacity: 0.8
             }).bindPopup(`
-                <strong>${callsign || "Callsign Unknown"}</strong><br>
-                ${city + ", " + state}<br>
-                Frequency: ${frequency + offset || "N/A"}<br>
-                Notes: ${notes || "N/A"}<br>
+                <strong>${Callsign || "Callsign Unknown"}</strong><br>
+                Frequency: ${Frequency + Offset || "N/A"}<br>
+                Notes: ${Notes || "N/A"}<br>
+                ${City + ", " + State}<br>
                 License: Ham
             `); // Add a popup with Ham repeater info
             markers.addLayer(marker); // Add marker to the cluster
@@ -55,7 +55,7 @@ fetch(GMRS_ENDPOINT)
     .then(response => response.json())
     .then(data => {
         data.forEach(repeater => {
-            const { name, state, Latitude, Longitude, frequency, type, status } = repeater;
+            const { Name, State, Latitude, Longitude, Frequency, Type, Status } = repeater;
 
             const marker = L.circleMarker([Latitude, Longitude], {
                 radius: 8,
@@ -65,10 +65,10 @@ fetch(GMRS_ENDPOINT)
                 opacity: 1,
                 fillOpacity: 0.8
             }).bindPopup(
-                `<strong>${name || "Name Unknown"}</strong><br>
-                Frequency: ${frequency}<br>
-                Type: ${type}<br>
-                Status: ${status}<br>
+                `<strong>${Name || "Name Unknown"}</strong><br>
+                Frequency: ${Frequency}<br>
+                Type: ${Type}<br>
+                Status: ${Status}<br>
                 License: GMRS
             `); // Add a popup with GMRS repeater info
             markers.addLayer(marker); // Add marker to the cluster
