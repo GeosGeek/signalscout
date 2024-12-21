@@ -36,8 +36,9 @@ app.post(HAM_DATA, async (req, res) => {
     try {
         const { State, City, Frequency, Callsign, Offset, Notes, lat, lon } = req.body;
         // Validate input
-        if (!lat || !lon || !frequency) {
-            return res.status(400).json({ error: 'Invalid data' });
+        // TODO: ensure values below are valid (lat<=90, lon<180 & lat>-180, frequency is positive)
+        if (!lat || !lon || !Frequency) {
+            return res.status(400).json({ error: 'Invalid data (lat, lon, or frequency)' });
         }
         // Store validated record in corresponding mongo model
         const newRepeater = new hamModel({
@@ -61,7 +62,7 @@ app.post(HAM_DATA, async (req, res) => {
 // Route to read ham repeater data
 app.get(HAM_DATA, async (req, result) => {
     try {
-        const data = await hamModel.find(); // Fetch Ham repeaters
+        const data = await hamModel.find().limit(1000); // Fetch Ham repeaters
         result.json(data);
     } catch (error) {
         result.status(500).json({ message: error.message });
@@ -69,13 +70,13 @@ app.get(HAM_DATA, async (req, result) => {
 });
 
 // Update ham repeaters
-app.put(HAM_DATA, async (req, result) => {
+app.put(`${HAM_DATA}/:id`, async (req, res) => {
     try {
         // Parse returned data
         const { id } = req.params;
         const { State, City, Frequency, Callsign, Offset, Notes, lat, lon } = req.body;
         // Validate repeater parameters
-        if (!lat || !lon || !frequency) {
+        if (!lat || !lon || !Frequency) {
             return res.status(400).json({ error: 'Invalid parameters' });
         }
         // Update record in mongo by ID
@@ -88,8 +89,8 @@ app.put(HAM_DATA, async (req, result) => {
             Notes,
             lat,
             lon,
-        }, { new: true });
-        // Return 404 if there aren't updates
+        }, { new: true }); // Ensure updated document is returned
+        // Return 404 if data wasn't found
         if (!updatedRepeater) {
             return res.status(404).json({ error: 'Data not found' });
         }
@@ -101,7 +102,7 @@ app.put(HAM_DATA, async (req, result) => {
 });
 
 // Delete ham repeater
-app.delete(HAM_DATA, async (req, res) => {
+app.delete(`${HAM_DATA}/:id`, async (req, res) => {
     try {
         // Get id of returned repeater
         const { id } = req.params;
@@ -121,7 +122,7 @@ app.delete(HAM_DATA, async (req, res) => {
 // Route to read gmrs repeaters
 app.get(GMRS_DATA, async (req, result) => {
     try {
-        const data = await gmrsModel.find(); // Fetch all GMRS repeaters
+        const data = await gmrsModel.find().limit(1000); // Fetch all GMRS repeaters
         result.json(data);
     } catch (error) {
         result.status(500).json({ message: error.message });
@@ -130,7 +131,7 @@ app.get(GMRS_DATA, async (req, result) => {
 
 app.get(DIGI_DATA, async (req, result) => {
     try {
-        const data = await digiModel.find(); // Fetch all digipeaters
+        const data = await digiModel.find().limit(1000); // Fetch all digipeaters
         result.json(data);
     } catch (error) {
         result.status(500).json({ message: error.message });
@@ -140,3 +141,8 @@ app.get(DIGI_DATA, async (req, result) => {
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
 });
+
+// Export endpoints for other modules
+module.exports = HAM_DATA;
+module.exports = GMRS_DATA;
+module.exports = DIGI_DATA;
