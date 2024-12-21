@@ -23,12 +23,14 @@
 - Toggle various repeater layers on/off (HAM/GMRS/DIGI)
 - Enable users to select from variety of basemaps
 ### Platform Migration
-- Convert current code to React Leaflet component-based implementation
+- Deploy as a Progressive Web App (PWA)
+- Leverage React Leaflet component-based implementation
 - Deploy Signal Scout as a React App
 - Convert code base to TypeScript
-- Wireframe mobile device UI
 ### Features
-- Enable mobile users to download data by state, repeater type and store locally on device
+- Enable offline where users have repeater data even when not connected to the internet
+  - Cache Map Tiles Locally via Service Workers (checkout Leaflet Offline plugin)
+  - Store repeater data locally via IndexedDB
 ### Other
 - Leverage JS code standardization tool such as Prettier or ESLint
 - Create a logo for Signal Scout
