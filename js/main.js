@@ -1,4 +1,5 @@
 // Initialize local data file paths
+// TODO: Dynamically import PORT to endpoints below
 const HAM_ENDPOINT = 'http://localhost:3000/api/ham_repeaters'
 const GMRS_ENDPOINT = 'http://localhost:3000/api/gmrs_repeaters'
 const DIGI_ENDPOINT = 'http://localhost:3000/api/digipeaters'
