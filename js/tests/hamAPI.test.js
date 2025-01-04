@@ -12,7 +12,7 @@ before(async () => {
 
 after(async () => {
     // Cleanup mongodb connection after tests
-    await mongoose.connection.db.dropDatabase();
+    // await mongoose.connection.db.dropDatabase();
     await mongoose.connection.close();
 });
 
