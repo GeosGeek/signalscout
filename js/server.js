@@ -21,7 +21,7 @@ const hamModel = require('../models/hamModel');
 const gmrsModel = require('../models/gmrsModel');
 const digiModel = require('../models/digiModel');
 
-// Don't start the server for tests.
+// Only start the server if not testing. e.g. Don't start the server for tests.
 if (process.env.NODE_ENV !== 'test') {
     app.listen(PORT, () => {
         console.log(`Server running on http://localhost:${PORT}`);
