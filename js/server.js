@@ -34,18 +34,18 @@ mongoose.connect('mongodb://localhost:27017/signalScout')
     .catch((error) => console.log('MongoDB connection error: ', error));
 
 // Serve HTML file
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '../index.html'));
+app.get('/', (request, response) => {
+    response.sendFile(path.join(__dirname, '../index.html'));
 });
 
 // Create ham repeaters
-app.post(HAM_ENDPOINT, async (req, res) => {
+app.post(HAM_ENDPOINT, async (request, response) => {
     try {
-        const { State, City, Frequency, Callsign, Offset, Notes, lat, lon } = req.body;
+        const { State, City, Frequency, Callsign, Offset, Notes, lat, lon } = request.body;
         // Validate input
         // TODO: ensure values below are valid (lat<=90, lon<180 & lat>-180, frequency is positive)
         if (!lat || !lon || !Frequency) {
-            return res.status(400).json({ error: 'Invalid data (lat, lon, or frequency)' });
+            return response.status(400).json({ error: 'Invalid data (lat, lon, or frequency)' });
         }
         // Store validated record in corresponding mongo model
         const newRepeater = new hamModel({
@@ -60,14 +60,14 @@ app.post(HAM_ENDPOINT, async (req, res) => {
         });
        // Save new record to mongo
        const savedRepeater = await newRepeater.save();
-       res.status(201).json(savedRepeater);
+       response.status(201).json(savedRepeater);
     } catch (err) {
-        res.status(500).json({ error: 'Failed to create data' });
+        response.status(500).json({ error: 'Failed to create data' });
     }
 });
 
 // Route to read ham repeater data
-app.get(HAM_ENDPOINT, async (req, result) => {
+app.get(HAM_ENDPOINT, async (request, result) => {
     try {
         const data = await hamModel.find().limit(10000); // Fetch Ham repeaters
         result.json(data);
@@ -77,14 +77,14 @@ app.get(HAM_ENDPOINT, async (req, result) => {
 });
 
 // Update ham repeaters
-app.put(`${HAM_ENDPOINT}/:id`, async (req, res) => {
+app.put(`${HAM_ENDPOINT}/:id`, async (request, response) => {
     try {
         // Parse returned data
-        const { id } = req.params;
-        const { State, City, Frequency, Callsign, Offset, Notes, lat, lon } = req.body;
+        const { id } = request.params;
+        const { State, City, Frequency, Callsign, Offset, Notes, lat, lon } = request.body;
         // Validate repeater parameters
         if (!lat || !lon || !Frequency) {
-            return res.status(400).json({ error: 'Invalid parameters' });
+            return response.status(400).json({ error: 'Invalid parameters' });
         }
         // Update record in mongo by ID
         const updatedRepeater = await hamModel.findByIdAndUpdate(id, {
@@ -99,35 +99,35 @@ app.put(`${HAM_ENDPOINT}/:id`, async (req, res) => {
         }, { new: true }); // Ensure updated document is returned
         // Return 404 if data wasn't found
         if (!updatedRepeater) {
-            return res.status(404).json({ error: 'Data not found' });
+            return response.status(404).json({ error: 'Data not found' });
         }
         // Set status 200 if ham repeater has been updated in mongo
-        res.status(200).json(updatedRepeater);
+        response.status(200).json(updatedRepeater);
     } catch (err) {
-        res.status(500).json({ error: 'Failed to update repeater in mongo' });
+        response.status(500).json({ error: 'Failed to update repeater in mongo' });
     }
 });
 
 // Delete ham repeater
-app.delete(`${HAM_ENDPOINT}/:id`, async (req, res) => {
+app.delete(`${HAM_ENDPOINT}/:id`, async (request, response) => {
     try {
         // Get id of returned repeater
-        const { id } = req.params;
+        const { id } = request.params;
         // Delete that repeater
         const deletedRepeater = await hamModel.findByIdAndDelete(id);
         // 
         if (!deletedRepeater) {
-            return res.status(404).json({ error: 'Data not found' });
+            return response.status(404).json({ error: 'Data not found' });
         }
         // 
-        res.status(200).json({ message: 'Data deleted successfully' });
+        response.status(200).json({ message: 'Data deleted successfully' });
     } catch (err) {
-        res.status(500).json({ error: 'Failed to delete data' });
+        response.status(500).json({ error: 'Failed to delete data' });
     }
 });
 
 // Route to read gmrs repeaters
-app.get(GMRS_ENDPOINT, async (req, result) => {
+app.get(GMRS_ENDPOINT, async (request, result) => {
     try {
         const data = await gmrsModel.find().limit(10000); // Fetch all GMRS repeaters
         result.json(data);
@@ -136,7 +136,7 @@ app.get(GMRS_ENDPOINT, async (req, result) => {
     }
 });
 
-app.get(DIGI_ENDPOINT, async (req, result) => {
+app.get(DIGI_ENDPOINT, async (request, result) => {
     try {
         const data = await digiModel.find().limit(10000); // Fetch all digipeaters
         result.json(data);
