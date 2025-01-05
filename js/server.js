@@ -1,6 +1,6 @@
-const HAM_DATA = '/api/ham_repeaters'
-const GMRS_DATA = '/api/gmrs_repeaters'
-const DIGI_DATA = '/api/digipeaters'
+const HAM_ENDPOINT = '/api/ham_repeaters'
+const GMRS_ENDPOINT = '/api/gmrs_repeaters'
+const DIGI_ENDPOINT = '/api/digipeaters'
 
 const express = require('express');
 const mongoose = require('mongoose');
@@ -39,7 +39,7 @@ app.get('/', (req, res) => {
 });
 
 // Create ham repeaters
-app.post(HAM_DATA, async (req, res) => {
+app.post(HAM_ENDPOINT, async (req, res) => {
     try {
         const { State, City, Frequency, Callsign, Offset, Notes, lat, lon } = req.body;
         // Validate input
@@ -67,9 +67,9 @@ app.post(HAM_DATA, async (req, res) => {
 });
 
 // Route to read ham repeater data
-app.get(HAM_DATA, async (req, result) => {
+app.get(HAM_ENDPOINT, async (req, result) => {
     try {
-        const data = await hamModel.find().limit(1000); // Fetch Ham repeaters
+        const data = await hamModel.find().limit(10000); // Fetch Ham repeaters
         result.json(data);
     } catch (error) {
         result.status(500).json({ message: error.message });
@@ -77,7 +77,7 @@ app.get(HAM_DATA, async (req, result) => {
 });
 
 // Update ham repeaters
-app.put(`${HAM_DATA}/:id`, async (req, res) => {
+app.put(`${HAM_ENDPOINT}/:id`, async (req, res) => {
     try {
         // Parse returned data
         const { id } = req.params;
@@ -109,7 +109,7 @@ app.put(`${HAM_DATA}/:id`, async (req, res) => {
 });
 
 // Delete ham repeater
-app.delete(`${HAM_DATA}/:id`, async (req, res) => {
+app.delete(`${HAM_ENDPOINT}/:id`, async (req, res) => {
     try {
         // Get id of returned repeater
         const { id } = req.params;
@@ -127,18 +127,18 @@ app.delete(`${HAM_DATA}/:id`, async (req, res) => {
 });
 
 // Route to read gmrs repeaters
-app.get(GMRS_DATA, async (req, result) => {
+app.get(GMRS_ENDPOINT, async (req, result) => {
     try {
-        const data = await gmrsModel.find().limit(1000); // Fetch all GMRS repeaters
+        const data = await gmrsModel.find().limit(10000); // Fetch all GMRS repeaters
         result.json(data);
     } catch (error) {
         result.status(500).json({ message: error.message });
     }
 });
 
-app.get(DIGI_DATA, async (req, result) => {
+app.get(DIGI_ENDPOINT, async (req, result) => {
     try {
-        const data = await digiModel.find().limit(1000); // Fetch all digipeaters
+        const data = await digiModel.find().limit(10000); // Fetch all digipeaters
         result.json(data);
     } catch (error) {
         result.status(500).json({ message: error.message });
@@ -150,6 +150,6 @@ app.listen(PORT, () => {
 });
 
 // Export endpoints for other modules
-module.exports = HAM_DATA;
-module.exports = GMRS_DATA;
-module.exports = DIGI_DATA;
+module.exports = HAM_ENDPOINT;
+module.exports = GMRS_ENDPOINT;
+module.exports = DIGI_ENDPOINT;
