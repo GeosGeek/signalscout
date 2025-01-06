@@ -21,13 +21,6 @@ const hamModel = require('../models/hamModel');
 const gmrsModel = require('../models/gmrsModel');
 const digiModel = require('../models/digiModel');
 
-// Only start the server if not testing. e.g. Don't start the server for tests.
-if (process.env.NODE_ENV !== 'test') {
-    app.listen(PORT, () => {
-        console.log(`Server running on http://localhost:${PORT}`);
-    });
-}
-
 // MongoDB Connection
 mongoose.connect('mongodb://localhost:27017/signalScout')
     .then(() => console.log('Connected to MongoDB!'))
@@ -145,11 +138,15 @@ app.get(DIGI_ENDPOINT, async (request, result) => {
     }
 })
 
-app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
-});
+// Only start the server in production. (Don't start for tests)
+if (process.env.NODE_ENV !== 'test') {
+    app.listen(PORT, () => {
+        console.log(`Server running on http://localhost:${PORT}`);
+    });
+}
 
 // Export endpoints for other modules
 module.exports = HAM_ENDPOINT;
 module.exports = GMRS_ENDPOINT;
 module.exports = DIGI_ENDPOINT;
+module.exports = { PORT };
