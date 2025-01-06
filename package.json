@@ -5,8 +5,8 @@
   "main": "index.js",
   "type": "commonjs",
   "scripts": {
-    "start": "node js/server.js & http-server --cors",
-    "test": "PORT=3002 NODE_ENV=test mocha tests/hamAPI.test.js"
+    "start": "PORT=3000 NODE_ENV=production node js/server.js & http-server --cors",
+    "test": "PORT=3001 NODE_ENV=test mocha tests/hamAPI.test.js"
   },
   "keywords": [
     "radio",
