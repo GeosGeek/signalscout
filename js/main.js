@@ -1,8 +1,10 @@
+const PORT = process.env.port;
+
 // Initialize local data file paths
 // TODO: Dynamically import PORT to endpoints below
-const HAM_ENDPOINT = 'http://localhost:3000/api/ham_repeaters'
-const GMRS_ENDPOINT = 'http://localhost:3000/api/gmrs_repeaters'
-const DIGI_ENDPOINT = 'http://localhost:3000/api/digipeaters'
+const HAM_ENDPOINT = `http://localhost:${PORT}/api/ham_repeaters`
+const GMRS_ENDPOINT = `http://localhost:${PORT}/api/gmrs_repeaters`
+const DIGI_ENDPOINT = `http://localhost:${PORT}/api/digipeaters`
 
 // Initialize the Leaflet map
 const map = L.map('map').setView([39.0, -78.3], 7); // Centering on Dulles Airport
