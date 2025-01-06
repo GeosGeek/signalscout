@@ -10,12 +10,6 @@ before(async () => {
     await mongoose.connect('mongodb://localhost:27017/test', { useNewUrlParser: true, useUnifiedTopology: true });
 });
 
-after(async () => {
-    // Cleanup mongodb connection after tests
-    // await mongoose.connection.db.dropDatabase();
-    await mongoose.connection.close();
-});
-
 describe('/api/ham_repeaters', () => {
     let createdRepeaterId;
 
@@ -62,4 +56,10 @@ describe('/api/ham_repeaters', () => {
     //     expect(res.status).to.equal(200);
     //     expect(res.body.message).to.equal('Data deleted successfully');
     // });
+});
+
+after(async () => {
+    // Cleanup mongodb connection after tests
+    // await mongoose.connection.db.dropDatabase();
+    await mongoose.connection.close();
 });
