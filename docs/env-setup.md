@@ -25,6 +25,8 @@ Before running the application, ensure you have the following installed:
       - For some reason, upon creation of the mongoose schemas and models, the express server would be executed and create new collections with all lowercase, despite camel casing being used when creating the collection.
 
 ## Troubleshooting
-- If browser doesn't seem to us latest code, try:
+- If no data is being loaded to browser:
+  - Double check there is data in the default mongo db `signalScout`
+- If browser doesn't seem to use latest code, try:
   - Clearing browser history and cache
   - Restarting `http-server` with `ctrl+c`
