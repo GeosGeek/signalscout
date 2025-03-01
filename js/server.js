@@ -30,7 +30,7 @@ app.get('/', (req, res) => {
 // Route to read ham repeater data
 app.get(HAM_DATA, async (req, result) => {
     try {
-        const data = await hamModel.find(); // Fetch Ham repeaters
+        const data = await hamModel.find();
         result.json(data);
     } catch (error) {
         result.status(500).json({ message: error.message });
@@ -40,7 +40,7 @@ app.get(HAM_DATA, async (req, result) => {
 // Route to read gmrs repeaters
 app.get(GMRS_DATA, async (req, result) => {
     try {
-        const data = await gmrsModel.find(); // Fetch all GMRS repeaters
+        const data = await gmrsModel.find();
         result.json(data);
     } catch (error) {
         result.status(500).json({ message: error.message });
@@ -49,7 +49,7 @@ app.get(GMRS_DATA, async (req, result) => {
 
 app.get(DIGI_DATA, async (req, result) => {
     try {
-        const data = await digiModel.find(); // Fetch all digipeaters
+        const data = await digiModel.find();
         result.json(data);
     } catch (error) {
         result.status(500).json({ message: error.message });

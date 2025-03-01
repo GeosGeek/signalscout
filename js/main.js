@@ -65,7 +65,7 @@ fetch(GMRS_ENDPOINT)
                 opacity: 1,
                 fillOpacity: 0.8
             }).bindPopup(
-                `<strong>${name || "Name Unknown"}</strong><br>
+                `<strong>${name || "Callsign Unknown"}</strong><br>
                 Frequency: ${frequency}<br>
                 Type: ${type}<br>
                 Status: ${status}<br>
