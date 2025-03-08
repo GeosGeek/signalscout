@@ -1,12 +1,14 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
-const server = require('../js/server');
+const mongoose = require('mongoose');
+
+const app = require('../js/server');
 const hamModel = require('../models/hamModel');
 const gmrsModel = require('../models/gmrsModel');
 const digiModel = require('../models/digiModel');
 
 const { expect } = chai;
-chai.use(chaiHttp);
+chai.use(chaiHttp); // Load chai-http plugin
 
 describe('API Endpoints', () => {
     before(async () => {
@@ -22,9 +24,9 @@ describe('API Endpoints', () => {
         await mongoose.disconnect();
     });
 
-    describe('HAM Repeater Endpoints', () => {
+    describe('Ham Repeater Endpoints', () => {
         it('should GET all ham repeaters', (done) => {
-            chai.request(server)
+            chai.request(app)
                 .get('/api/ham_repeaters')
                 .end((err, res) => {
                     expect(res).to.have.status(200);
@@ -44,7 +46,7 @@ describe('API Endpoints', () => {
                 lat: 38.9685,
                 lon: -77.7368
             };
-            chai.request(server)
+            chai.request(app)
                 .post('/api/ham_repeaters')
                 .send(newHamRepeater)
                 .end((err, res) => {
@@ -67,7 +69,7 @@ describe('API Endpoints', () => {
                 lon: -77.7368
             };
             hamModel.create(updatedHamRepeater).then((repeater) => {
-                chai.request(server)
+                chai.request(app)
                     .put(`/api/ham_repeaters/${repeater._id}`)
                     .send(updatedHamRepeater)
                     .end((err, res) => {
@@ -91,7 +93,7 @@ describe('API Endpoints', () => {
                 lon: -77.7368
             };
             hamModel.create(newHamRepeater).then((repeater) => {
-                chai.request(server)
+                chai.request(app)
                     .delete(`/api/ham_repeaters/${repeater._id}`)
                     .end((err, res) => {
                         expect(res).to.have.status(200);
