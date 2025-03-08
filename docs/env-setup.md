@@ -30,3 +30,6 @@ Before running the application, ensure you have the following installed:
 - If browser doesn't seem to use latest code, try:
   - Clearing browser history and cache
   - Restarting `http-server` with `ctrl+c`
+
+## Miscelaneous
+- Using `chai-http` version `4.3.0` due to issues (`ERR_PACKAGE_PATH_NOT_EXPORTED`) when running `mocha test` from `package.json` (used command `npm install chai-http@4.3.0 --save-dev`)
