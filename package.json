@@ -5,9 +5,24 @@
   "main": "index.js",
   "scripts": {
     "start": "node js/server.js & http-server --cors",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./node_modules/mocha/bin/mocha.js"
   },
-  "keywords": ["radio", "ham", "gmrs", "digipeater", "repeater", "amateur radio"],
+  "keywords": [
+    "radio",
+    "ham",
+    "vhf",
+    "uhf",
+    "2 meter",
+    "70 cm",
+    "gmrs",
+    "digipeater",
+    "repeater",
+    "amateur radio",
+    "packet radio",
+    "aprs",
+    "emcomm",
+    "emergency communications"
+  ],
   "author": "GeosGeek",
   "license": "ISC",
   "dependencies": {
