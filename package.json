@@ -26,8 +26,11 @@
   "author": "GeosGeek",
   "license": "ISC",
   "dependencies": {
+    "chai": "^5.2.0",
+    "chai-http": "^5.1.1",
     "cors": "^2.8.5",
     "express": "^4.21.1",
+    "mocha": "^11.1.0",
     "mongoose": "^8.7.3"
   }
 }
