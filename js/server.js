@@ -28,6 +28,7 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../index.html'));
 });
 
+// Ham Repeater Endpoints
 // Read
 app.get(HAM_DATA, async (req, result) => {
     try {
@@ -69,7 +70,8 @@ app.delete(`${HAM_DATA}/:id`, async (req, result) => {
     }
 });
 
-// Repeat the same for GMRS and DIGI data
+// GMRS Repeater Endpoints
+// Read
 app.get(GMRS_DATA, async (req, result) => {
     try {
         const data = await gmrsModel.find();
@@ -79,6 +81,7 @@ app.get(GMRS_DATA, async (req, result) => {
     }
 });
 
+// Create
 app.post(GMRS_DATA, async (req, result) => {
     const newGmrsRepeater = new gmrsModel(req.body);
     try {
@@ -89,6 +92,7 @@ app.post(GMRS_DATA, async (req, result) => {
     }
 });
 
+// Update
 app.put(`${GMRS_DATA}/:id`, async (req, result) => {
     try {
         const updatedRepeater = await gmrsModel.findByIdAndUpdate(req.params.id, req.body, { new: true });
@@ -98,6 +102,7 @@ app.put(`${GMRS_DATA}/:id`, async (req, result) => {
     }
 });
 
+// Delete
 app.delete(`${GMRS_DATA}/:id`, async (req, result) => {
     try {
         await gmrsModel.findByIdAndDelete(req.params.id);
@@ -107,6 +112,8 @@ app.delete(`${GMRS_DATA}/:id`, async (req, result) => {
     }
 });
 
+// Digital Repeater Endpoints
+// Read
 app.get(DIGI_DATA, async (req, result) => {
     try {
         const data = await digiModel.find();
@@ -116,6 +123,7 @@ app.get(DIGI_DATA, async (req, result) => {
     }
 });
 
+// Create
 app.post(DIGI_DATA, async (req, result) => {
     const newDigiRepeater = new digiModel(req.body);
     try {
@@ -126,6 +134,7 @@ app.post(DIGI_DATA, async (req, result) => {
     }
 });
 
+// Update
 app.put(`${DIGI_DATA}/:id`, async (req, result) => {
     try {
         const updatedRepeater = await digiModel.findByIdAndUpdate(req.params.id, req.body, { new: true });
@@ -135,6 +144,7 @@ app.put(`${DIGI_DATA}/:id`, async (req, result) => {
     }
 });
 
+// Delete
 app.delete(`${DIGI_DATA}/:id`, async (req, result) => {
     try {
         await digiModel.findByIdAndDelete(req.params.id);
@@ -144,6 +154,7 @@ app.delete(`${DIGI_DATA}/:id`, async (req, result) => {
     }
 });
 
+// Start the server
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
 });
