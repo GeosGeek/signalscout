@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node js/server.js & http-server --cors",
-    "test": "./node_modules/mocha/bin/mocha.js"
+    "test": "mocha 'test/*.test.js' --reporter spec"
   },
   "keywords": [
     "radio",
@@ -27,10 +27,12 @@
   "license": "ISC",
   "dependencies": {
     "chai": "^5.2.0",
-    "chai-http": "^5.1.1",
     "cors": "^2.8.5",
     "express": "^4.21.1",
     "mocha": "^11.1.0",
     "mongoose": "^8.7.3"
+  },
+  "devDependencies": {
+    "chai-http": "^4.3.0"
   }
 }
