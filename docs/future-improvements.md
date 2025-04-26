@@ -1,4 +1,15 @@
 # Future Improvements
+## v1.0
+### Deploy as React app
+  - Created with `Vite`, a modern build tool aimed at a faster and more friendly dev experience for web projects.
+### Scrape Data Sources
+  - Python scripts to pull data
+  - Store in PostGIS using `psycopg2` or `SQLAlchemy`
+  - Automate jobs with `Apache Airflow`
+### Switch Backend to PostgreSQL + PostGIS
+  - Create schemas
+### Define a Hosting Solution
+  - Prob somewhere in the cloud...
 ### Display
 - ~~Display all attributes for each repeater~~
 - ~~Display multiple reapeaters in same location with Leaflet.markerCluster~~
